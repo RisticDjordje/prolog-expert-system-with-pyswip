@@ -1,4 +1,4 @@
-# import necessary packages
+# import necessary packages 
 from pyswip.prolog import Prolog
 from pyswip.easy import *
 
@@ -10,11 +10,34 @@ options = {
     'meal_size': ['snack', 'proper_meal'],
     'type_of_snack': ['sweet', 'savory'],
     'distance_to_travel': ['less_than_5km', 'more_than_5km'],
-    'type_of_cuisine': ['chinese', 'indian', 'vietnamese', 'cajun', 'japanese'],
-    'budget': ['more_than_25usd', 'less_than_25usd'],
+    'type_of_cuisine': ['chinese', 'indian', 'vietnamese', 'japanese', 'argentinian'],
+    'budget': ['less_than_25usd', 'more_than_25usd'],
     'dietary_type': ['vegetarian', 'vegan', 'omnivore'],
-    'vibe_wanted': ['casual', 'fine_dining'],
-    'how_many_people': ['<5', '>5'],
+    'vibe_wanted': ['casual', 'formal'],
+    'how_many_people': ['less_than_5', 'more_than_5'],
+}
+
+options_english = { # for printing purposes
+    'snack': 'snack',
+    'proper_meal': 'proper meal',
+    'sweet': 'sweet',
+    'savory': 'savory',
+    'less_than_5km': 'less than 5km',
+    'more_than_5km': 'more than 5km',
+    'chinese': 'Chinese',
+    'indian': 'Indian',
+    'vietnamese': 'Vietnamese',
+    'japanese': 'Japanese',
+    'argentinian': 'Argentinian',
+    'more_than_25usd': 'more than 25 USD',
+    'less_than_25usd': 'less than 25 USD',
+    'vegetarian': 'vegetarian',
+    'vegan': 'vegan',
+    'omnivore': 'omnivore',
+    'casual': 'casual',
+    'formal': 'formal',
+    'less_than_5': 'less than 5 people',
+    'more_than_5': 'more than 5 people',
 }
 
 # define prompts for each question
@@ -31,38 +54,52 @@ prompts = {
 
 # dictionary of restaurant names and links 
 restaurant_recommendations = {
-    'ice_cream': {'name': 'Ice Cream',
-                    'link': ''},
-    'empanada': {'name': 'Empanada',
-                    'link': ''},
-    'un_cueno_chino': {'name': 'Un Cueno Chino',
-                          'link': ''},
+    'ice_cream': {'name': 'Rapa Nui',
+                    'link': 'https://rapanui.com.ar/'},
+    'empaluna': {'name': 'Empaluna',
+                    'link': 'https://www.instagram.com/empaluna/?hl=en'},
+    
+    'un_cuenco_chino': {'name': 'Un Cuenco Chino',
+                          'link': 'https://www.facebook.com/Un-Cuenco-chino-246259128847895/'},
     'delhi_mahal': {'name': 'Delhi Mahal',
-                          'link': ''},
-    'salgon_noodle_bar': {'name': 'Salgon Noodle Bar',
-                            'link': ''}, 
-    'sacro': {'name': 'Sacro',
-                'link': ''},
+                          'link': 'https://www.facebook.com/pages/Delhi-Mahal/202198679931369'},
+    'in_n_out_sushi': {'name': 'In n Out Sushi',
+                          'link': 'https://www.instagram.com/inandoutsushi/?hl=en'},
+    'santos_manjares': {'name': 'Santos Manjares',
+                            'link': 'https://www.facebook.com/santosmanjares/'},             
+    'saigon_noodle_bar': {'name': 'Saigon Noodle Bar',
+                            'link': 'https://www.saigonargentina.com/'}, 
+    
+    'koko_bao': {'name': 'Koko Bao',
+                'link': 'https://www.kokobaobar.com/'},
     'don_julio': {'name': 'Don Julio',
-                    'link': ''},
+                    'link': 'https://www.parrilladonjulio.com/'},
+    
     'chui': {'name': 'Chui',
-                'link': ''},
+                'link': 'https://www.instagram.com/chui.ba/?hl=en'},
     'sampa': {'name': 'Sampa',
-                'link': ''},
-    'gran_dabbang': {'name': 'Gran Dabbang',
-                        'link': ''},
-    'bao': {'name': 'Bao',
-            'link': ''},
-    'himitsu_kichi': {'name': 'Himitsu Kichi',
-                        'link': ''},
-    'las_galgos_bar': {'name': 'Las Galgos Bar',
-                        'link': ''},
-    'nola': {'name': 'Nola',
-                'link': ''}, 
-    'calden_del_soho': {'name': 'Calden Del Soho',
-                        'link': ''},
+                'link': 'https://www.sampa.com.ar/'},
+ 
+    'xi_bei_feng' : {'name': 'Xi Bei Feng',
+                        'link': 'https://www.xibeifeng.com.ar/'},
+    'punch_curry_bar': {'name': 'Punch Curry Bar',
+                        'link': 'https://www.punchcurrybar.com/'},
+    'cang_tin': {'name': 'Cang Tin',
+                    'link': 'https://www.instagram.com/cangtinba/?hl=en'},
+    'mirutaki_ramen_and_sushi': {'name': 'Mirutaki Ramen and Sushi',
+                                    'link': 'https://www.tripadvisor.com/Restaurant_Review-g312741-d13510648-Reviews-Mirutaki-Buenos_Aires_Capital_Federal_District.html'},
+    'las_cabras' : {'name': 'Las Cabras',
+                    'link': 'https://www.tripadvisor.com/Restaurant_Review-g312741-d1187741-Reviews-Las_Cabras-Buenos_Aires_Capital_Federal_District.html'},
+    
+    'koi_dumplings_palermo': {'name': 'Koi Dumplings Palermo', 
+                              'link': 'https://koidumplings.com/'},
+    'tandoor': {'name': 'Tandoor',
+                'link': 'https://www.tandoor.com.ar/'},
+    'green_bamboo': {'name': 'Green Bamboo',
+                        'link': 'https://www.instagram.com/greenbambooargentina/?hl=en'},
+    'donnet': {'name': 'Donnet',
+                'link': 'https://www.instagram.com/donnet_te_ama},'}
 }
-
 
 # Define foreign function to read user input
 def read_py(A, V, Y):
@@ -95,50 +132,65 @@ def read_py(A, V, Y):
         return False 
 
 
-def show_options(strings):
+def show_options(question):
+    """Print out the options for a given question. It prints it out in nice English format.
+    
+    Args:
+        question (str): The question to print out the options for.
+
+    Returns:
+        None
+        """
 
     print("Please choose one of the following options:")
-    for index, option in enumerate(options[strings]):
-        print(f'\t{str(index + 1)} : {option}')
+    for index, option in enumerate(options[question]):
+        print(f'\t{str(index + 1)} : {options_english[option]}')
     print("---------------------------------------------")
 
 
 def main():
-    global user_answers
-    user_answers = {}  # store user responses to questions
-    # Define predicates
-    retractall = Functor("retractall") # remove all items from Knowledge Base
-    known = Functor("known", 3) # predicate for storing user responses
+    """Main function to run the program."""
 
-    read_py.arity = 3 # set the arity of the foreign function
-    registerForeign(read_py) # register the foreign function
+    while True: # keeps repeating until user enters 'n' to stop the program
+        global user_answers
+        user_answers = {}  # store user responses to questions
+        # Define predicates
+        retractall = Functor("retractall") # remove all items from Knowledge Base
+        known = Functor("known", 3) # predicate for storing user responses
 
-    # get the path to the KB file
-    try: 
-        prolog.consult("KB.pl") # load the KB file (make sure you open the entire folder so it runs)
-        call(retractall(known))  # remove all items from Knowledge Base
-    except Exception as e:
-        print(e)
-        print("Please make sure you have the KB file in the same folder as this file.")
-        return
-    
-    recommendations = [s for s in prolog.query("recommendation(X).")]  # get recommendation
+        read_py.arity = 3 # set the arity of the foreign function
+        registerForeign(read_py) # register the foreign function
 
-    # printing out the recommendation
-    if recommendations:
-        print(f"\nGreat news! We found a perfect match to your choices. You should try out {restaurant_recommendations[recommendations[0]['X']]['name']}!")
-        print(f"This is the link to the restaurant: {restaurant_recommendations[recommendations[0]['X']]['link']}\n")
-    else:
-        print("\nUnfortunately, we could not find a restaurant that matches your criteria.")
-        while True:
-            try_again = input("\nDo you want to try again (y/n)? ")
+        # get the path to the KB file
+        try: 
+            prolog.consult("KB.pl") # load the KB file (make sure you open the entire folder so it runs)
+            call(retractall(known))  # remove all items from Knowledge Base
+        except Exception as e:
+            print(e)
+            print("Please make sure you have the KB file in the same folder as this file.")
+            return
+        
+        recommendations = [s for s in prolog.query("recommendation(X).")]  # get recommendation
+
+        # printing out the recommendation
+        if recommendations:
+            print(f"\nGreat news! We found a perfect match to your choices. You should try out {restaurant_recommendations[recommendations[0]['X']]['name']}!")
+            print(f"This is the link to the restaurant: {restaurant_recommendations[recommendations[0]['X']]['link']}\n")
+     
+            try_again = input("\nDo you want to use the app again (y/n)? ")
             if try_again == 'y':
-                main()
+                continue
             elif try_again == 'n':
                 print("Thank you for using our service!")
                 break
-            else:
-                print("Please enter either 'y' or 'n'")
+        else:
+            print("\nUnfortunately, we could not find a restaurant that matches your criteria.")
+            try_again = input("\nDo you want to use the app again (y/n)? ")
+            if try_again == 'y':
+                continue
+            elif try_again == 'n':
+                print("Thank you for using our service!")
+                break
 
 if __name__ == "__main__":
     main()
